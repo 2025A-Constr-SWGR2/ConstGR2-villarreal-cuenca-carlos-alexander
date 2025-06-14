@@ -53,5 +53,4 @@ jobs:
       - run: echo "🧪 The workflow is now ready to test your code."
       - name: List files in the repository
         run: ls ${{ github.workspace }}
-      - name: Print job finished message
-        run: echo "📊 Job finished."
+      - run: echo "📊 Job finished with status: ${{ job.status }}"
