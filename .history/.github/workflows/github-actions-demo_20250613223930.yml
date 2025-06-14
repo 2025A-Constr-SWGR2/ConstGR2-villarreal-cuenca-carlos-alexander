@@ -9,16 +9,17 @@ jobs:
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - name: Limpieza de carpeta temporal antes del checkout
         shell: pwsh
-        run: |
-          Write-Host "Limpiando el directorio temporal..."
-          Get-ChildItem -Path $env:RUNNER_TEMP -Recurse -Force -ErrorAction SilentlyContinue |
-          ForEach-Object {
-          try {
-            Remove-Item $_.FullName -Recurse -Force -ErrorAction Stop
-          } catch {
-            Write-Host "No se pudo eliminar: $($_.FullName) - probablemente está en uso."
-            }
-          }
+  run: |
+    Write-Host "Limpiando el directorio temporal..."
+    Get-ChildItem -Path $env:RUNNER_TEMP -Recurse -Force -ErrorAction SilentlyContinue |
+      ForEach-Object {
+        try {
+          Remove-Item $_.FullName -Recurse -Force -ErrorAction Stop
+        } catch {
+          Write-Host "No se pudo eliminar: $($_.FullName) - probablemente está en uso."
+        }
+      }
+
       - name: Check out repository code
         uses: actions/checkout@v4
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
