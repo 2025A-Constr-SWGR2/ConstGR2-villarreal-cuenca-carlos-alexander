@@ -6,9 +6,10 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: [self-hosted]
     steps:
+
       - name: 🔄 Limpieza preventiva de carpetas temporales (Windows)
         if: runner.os == 'Windows'
-        shell: powershell
+        shell: pwsh
         run: |
           Write-Host "Intentando limpiar _temp manualmente..."
           Remove-Item -Path "$env:RUNNER_TEMP\*" -Recurse -Force -ErrorAction SilentlyContinue
@@ -20,7 +21,7 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
         with:
-          clean: false # Evita limpieza agresiva que causa EBUSY
+          clean: false  # Evita limpieza agresiva que causa EBUSY
 
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
 
@@ -34,7 +35,7 @@ jobs:
 
       - name: 🧹 Limpieza final manual de temporales (opcional)
         if: runner.os == 'Windows'
-        shell: powershell
+        shell: pwsh
         run: |
           Write-Host "Limpieza post-job de carpetas temporales..."
           Remove-Item -Path "$env:RUNNER_TEMP\*" -Recurse -Force -ErrorAction SilentlyContinue
