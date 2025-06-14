@@ -9,7 +9,7 @@ jobs:
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - name: Terminar procesos que puedan estar activos
         if: runner.os == 'Windows'
-        run: taskkill /F /IM your_process_name.exe || true # Usa || true para evitar que la compilación falle si el proceso no se encuentra
+  run: taskkill /F /IM your_process_name.exe || true # Usa || true para evitar que la compilación falle si el proceso no se encuentra
       - name: Check out repository code
         uses: actions/checkout@v4
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
