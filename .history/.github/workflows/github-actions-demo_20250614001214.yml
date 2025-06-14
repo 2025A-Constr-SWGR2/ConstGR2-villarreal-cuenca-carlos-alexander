@@ -10,10 +10,7 @@ jobs:
       - name: Terminar procesos que puedan estar activos
         if: runner.os == 'Windows'
         run: |
-          taskkill /F /IM your_process_name.exe 
-          if ($? -eq $false) {
-            Write-Host "Process 'your_process_name.exe' not found or could not be terminated. Continuing anyway."
-          }
+          taskkill /F /IM your_process_name.exe || true # Usa || true para evitar que la compilación falle si el proceso no se encuentra
       - name: Check out repository code
         uses: actions/checkout@v4
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
