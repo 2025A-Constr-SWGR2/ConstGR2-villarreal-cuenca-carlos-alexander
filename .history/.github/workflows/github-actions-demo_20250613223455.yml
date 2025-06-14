@@ -8,8 +8,8 @@ jobs:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - name: Clean temp directory
-        shell: pwsh
-        run: |
+          shell: pwsh
+          run: 
             Write-Host "Cleaning temp folders..."
             Get-ChildItem -Path $env:RUNNER_TEMP -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
       - name: Check out repository code
