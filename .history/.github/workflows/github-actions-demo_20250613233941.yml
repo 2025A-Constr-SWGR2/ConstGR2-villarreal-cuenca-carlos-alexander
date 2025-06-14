@@ -32,4 +32,4 @@ jobs:
       - name: Listar archivos
         run: ls ${{ github.workspace }}
       - name: Mostrar estado final del job
-        run: "echo \"🍏 Estado final del job: ${{ job.status }}\""
+        run: echo "🍏 Estado final del job: ${{ job.status }}"
