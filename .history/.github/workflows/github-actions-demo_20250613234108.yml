@@ -1,0 +1,35 @@
+name: GitHub Actions Demo
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on: [push]
+
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: [self-hosted]
+
+    steps:
+      - run: echo "🎉 The job was automáticamente activado por ${{ github.event_name }}."
+      - run: echo "🐧 Se está ejecutando en un runner con SO: ${{ runner.os }}."
+
+      - name: Limpiar .git si está bloqueado
+        if: runner.os == 'Windows'
+        shell: powershell
+        run: |
+          if (Test-Path ".git") {
+            Write-Host "Eliminando carpeta .git bloqueada…"
+            Remove-Item -Recurse -Force -Path .git -ErrorAction SilentlyContinue
+          }
+
+      - name: Check out repository code
+        uses: actions/checkout@v4
+        with:
+          clean: false
+          persist-credentials: false
+          fetch-depth: 1
+          lfs: false
+          submodules: false
+
+      - run: echo "💡 El repositorio ${{ github.repository }} fue clonado al runner."
+      - name: Listar archivos
+        run: ls ${{ github.workspace }}
+      - name: Mostrar estado final del job
+        run: "echo \"🍏 Estado final del job: ${{ job.status }}\""
